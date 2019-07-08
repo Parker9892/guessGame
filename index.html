@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>The Psychic Game</h1>
+
+<h3>Guess what I'm thinking</h3>
+<h3>Press a key to start the game</h3>
+
+<p id="winsText"></p>
+<p id="lossesText"></p>
+<p id="guessesWrongText"></p>
+<p id="remainingGuessesText"></p>
+
+<script>
+
+   let winsText = document.querySelector('#winsText')
+    let lossesText = document.querySelector('#lossesText')
+    let guessesWrongText = document.querySelector('#guessesWrongText')
+    let guessesText = document.querySelector('#remainingGuessesText')
+ 
+   let wins = 0
+   let losses = 0
+   let guessesRemaining = 9
+   let userInput = []
+
+   function restart() {
+       guessesRemaining = 9
+       userInput = []
+       
+   }
+
+document.onkeydown = function(event){
+    let userGuess = event.key
+    let arr = ['a']
+    let computerGuess = arr[Math.floor(Math.random() * arr.length)];
+    console.log(computerGuess)
+
+
+    
+    if(userGuess == computerGuess){
+        wins++
+    }
+    else if(userGuess != computerGuess ){
+        guessesRemaining--
+        userInput.push(userGuess)
+
+        if(guessesRemaining === 0){
+            losses++
+            restart()
+        }
+    }
+
+
+  
+
+
+    winsText.textContent =  `Total Wins ${wins}`        
+    lossesText.textContent = `Total Losses ${losses}`
+    guessesText.textContent = `Guesses Remaining ${guessesRemaining}`
+    guessesWrongText.textContent = `User Input ${userInput}`
+
+
+    
+}
+
+</script>
+
+
+</body>
+</html>
